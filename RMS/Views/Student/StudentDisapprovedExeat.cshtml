@@ -1,0 +1,180 @@
+﻿@model IEnumerable<RMS.ViewModels.Records.RecordsVM>
+
+@{
+    var rowIndex = 1;
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <div class="page-header">
+
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="mt-5">
+
+                        <h4 class="card-title float-left mt-2">Disapproved Exeat</h4>
+                        <a asp-action="Create" class="btn btn-primary float-right veiwbutton">Add Student</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <div class="card card-table">
+
+                    <div class="card-body booking_card">
+                        @*<div class="top-nav-search">
+                            <form asp-action="ApprovedExeat">
+                                <input type="text" class="form-control" name="search" placeholder="Matric Number">
+                                <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>*@
+                        <div class="table-responsive">
+                            <table class="datatable table table-stripped table table-hover table-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+
+                                        <th>Img</th>
+                                        <th>Full Name</th>
+                                        <th>Matric Number</th>
+                                        <th>Department</th>
+                                        <th>Email</th>
+                                        <th>Exite Date</th>
+                                        <th>Expected Return from Exeat</th>
+                                        <th>Exeat Reason</th>
+                                        <th>Status</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>@(rowIndex++)</td>
+
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                <a asp-action="Details" asp-controller="Student" asp-route-id="@item.StudentId" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="~/StudentIMG/@item.PhotoPath" alt="User Image"></a>
+                                                <a href="profile.html"></a>
+                                            </h2>
+                                        </td>
+                                        <td>@item.FirstName @item.LastName</td>
+                                        <td>@item.MatricNumber</td>
+                                        <td>@item.Department</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.ExpectedReturnFromExeateDate</td>
+                                        <td>@item.ExeatReason</td>
+                                        @if (item.IsSignedIn == true)
+                                        {
+                                            <td>
+                                                <div class="actions">
+                                                    <a href="#" class="btn btn-sm bg-success-light mr-2">
+                                                        Signed-In
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <div class="actions">
+                                                    <a href="#" class="btn btn-sm bg-danger-light mr-2">
+                                                        Signed-Out
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        }
+
+
+                                        <td>
+                                            @*<button onclick="OpenSignOutModal(@item.StudentId)" data-toggle="modal" data-target="#signout_asset" class="btn btn-primary"><i class="fa fa-edit mr-1"></i>SIGN OUT</button>*@
+                                            <a asp-action="SignOut" asp-route-id="@item.StudentId" class="btn btn-primary"><i class="fa fa-eye mr-1"></i>DETAILS</a>
+
+                                        </td>
+
+
+                                    </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (ViewBag.search != null)
+        {
+            <a asp-action="StudentList" class="btn btn-primary float-right veiwbutton">See All</a>
+
+        }
+
+    </div>
+</div>
+
+@*<div id="signin_asset" id="signinModal" class="modal fade delete-modal" role="dialog">
+
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                    <h3 class="delete_class">Are you sure want to sign in this Student?</h3>
+                    <div class="m-t-20">
+                        <form asp-action="SignIn" method="post">
+                            <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                            <input id="studentId" name="id" type="hidden" />
+                            <button type="submit" style="margin-left:50px;" class="btn btn-primary">Sign In</button>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@*<div id="signout_asset" id="signoutModal" class="modal fade delete-modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                    <h3 class="delete_class">Are you sure want to sign Out this Student?</h3>
+                    <div class="m-t-20">
+                        <form asp-action="SignOut" method="post">
+                            <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                            <input id="studentId" name="id" type="hidden" />
+                            <button type="submit" style="margin-left:50px;" class="btn btn-danger">Sign Out</button>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+@*<script>
+        function OpenSignInModal(StudentId) {
+
+            document.getElementById('studentId').value = StudentId;
+            $('#signinModal').modal('show');
+        }
+    </script>*@
+<script>
+    function OpenSignOutModal(StudentId) {
+
+        document.getElementById('studentId').value = StudentId;
+        $('#signoutModal').modal('show');
+    }
+</script>
+
+<script>
+    $("#success-alert").fadeTo(2000, 1500).slideUp(1500, function () {
+        $("#success-alert").slideUp(1500);
+    });
+</script>

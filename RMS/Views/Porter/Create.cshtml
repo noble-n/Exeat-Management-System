@@ -1,0 +1,64 @@
+﻿@model RMS.ViewModel.Porters.CreatePorterVM
+<div class="main-wrapper">
+
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title mt-5">Add Porter</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="row formtype">
+                            <div class="col-12 col-sm-1">
+                                <img id="imageShown" alt="your image" style="height:120px; width:100px;" />
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Upload Image</label>
+                                    <input type="file" onchange="document.getElementById('imageShown').src = window.URL.createObjectURL(this.files[0])" asp-for="Photo" class="form-control">
+                                    <span asp-validation-for="Photo" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input class="form-control" type="text" asp-for="FullName">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" type="text" asp-for="Email">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input class="form-control" type="text" asp-for="PhoneNumber">
+                                </div>
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary buttonedit ml-2">Add Porter</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

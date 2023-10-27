@@ -1,0 +1,285 @@
+﻿@model IEnumerable<RMS.ViewModels.Records.RecordsVM>
+
+@{
+    var rowIndex = 1;
+}
+
+
+@if (ViewBag.Show == true)
+{
+    <script>
+
+
+        window.addEventListener('load',
+            function () {
+                $('#exampleModal').modal('show');
+            }, false);
+    </script>
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+
+
+
+        <div @*id="delete_asset"*@ id="exampleModal" class="modal fade delete-modal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                        <h3 class="delete_class"> @ViewBag.AmountOfStudents Student(s) Whose Exeat Days have been exceeded have not returned. Do you want to send a reminder email?</h3>
+
+                        <div class="m-t-20">
+                            <form asp-action="EmailSending" asp-controller="Porter" method="post">
+                                <a href="#" class="btn btn-danger" data-dismiss="modal">No</a>
+                                <button type="submit" class="btn btn-primary">Yes</button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="page-header">
+
+            <div class="row">
+
+                <div class="col-sm-12 mt-5">
+                    <div class="col-sm-12">
+                        @if (ViewBag.Success == "yes")
+                        {
+                            <div class="alert alert-success alert-dismissible fade show" id="success-alert" role="alert">
+                                <strong>Success!</strong> Task Performed Successfully.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        }
+                        @if (ViewBag.Failed == "yes")
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show" id="success-alert" role="alert">
+                                <strong>Oops!</strong> An Error Occured Please Try Again. Thank You.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        }
+                        @if (ViewBag.EmailSent == "yes")
+                        {
+                    <div class="alert alert-success alert-dismissible fade show" id="success-alert" role="alert">
+                        <strong>Success!</strong> Email Sent Successfully.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                        }
+
+
+                    </div>
+                    <h3 class="page-title mt-3">Good Morning Global Admin!</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card board1 fill">
+                    <div class="card-body">
+                        <div class="dash-widget-header">
+                            <div>
+                                <h3 class="card_widget_header">236</h3>
+                                <h6 class="text-muted">Total Booking</h6>
+                            </div>
+                            <div class="ml-auto mt-md-3 mt-lg-0">
+                                <span class="opacity-7 text-muted">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="8.5" cy="7" r="4"></circle>
+                                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card board1 fill">
+                    <div class="card-body">
+                        <div class="dash-widget-header">
+                            <div>
+                                <h3 class="card_widget_header">180</h3>
+                                <h6 class="text-muted">Available Rooms</h6>
+                            </div>
+                            <div class="ml-auto mt-md-3 mt-lg-0">
+                                <span class="opacity-7 text-muted">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign">
+                                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card board1 fill">
+                    <div class="card-body">
+                        <div class="dash-widget-header">
+                            <div>
+                                <h3 class="card_widget_header">1538</h3>
+                                <h6 class="text-muted">Enquiry</h6>
+                            </div>
+                            <div class="ml-auto mt-md-3 mt-lg-0">
+                                <span class="opacity-7 text-muted">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-plus">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z">
+                                        </path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="12" y1="18" x2="12" y2="12"></line>
+                                        <line x1="9" y1="15" x2="15" y2="15"></line>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card board1 fill">
+                    <div class="card-body">
+                        <div class="dash-widget-header">
+                            <div>
+                                <h3 class="card_widget_header">364</h3>
+                                <h6 class="text-muted">Collections</h6>
+                            </div>
+                            <div class="ml-auto mt-md-3 mt-lg-0">
+                                <span class="opacity-7 text-muted">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h4 class="card-title">EXEAT IN THE LAST 6 MONTHS</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="line-chart"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12 col-lg-6">
+
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h4 class="card-title">SOMETHING HERE</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="donut-chart"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="card card-table">
+                    <div class="card-body booking_card">
+                        <div class="card card-table flex-fill">
+                            <div class="card-header">
+                                <h4 class="card-title float-left mt-2" style="margin-left:-27px;">Students On Exeat</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="datatable table table-stripped table table-hover table-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>S/N</th>
+                                                <th>Img</th>
+                                                <th>Full Name</th>
+                                                <th>Matric Number</th>
+                                                <th>Department</th>
+                                                <th>Email</th>
+                                                <th>Ph.Number</th>
+                                                <th>Sign-Out Date</th>
+                                                <th>Signed-Out By</th>
+                                                <th class="text-right">Expected Return Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@(rowIndex++)</td>
+
+                                                    <td>
+                                                        <h2 class="table-avatar">
+                                                            <a asp-action="Details" asp-controller="Student" asp-route-id="@item.StudentId" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="~/StudentIMG/@item.PhotoPath" alt="User Image"></a>
+                                                            <a href="profile.html"></a>
+                                                        </h2>
+                                                    </td>
+                                                    <td>@item.FirstName @item.LastName</td>
+                                                    <td>@item.MatricNumber</td>
+                                                    <td>@item.Department</td>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.PhoneNumber</td>
+
+                                                    <td>@item.SignOutDate</td>
+                                                    <td>@item.SignedOutBy</td>
+
+                                                    <td class="text-right">
+                                                        @item.ExpectedReturnFromExeateDate
+
+                                                    </td>
+
+
+                                                </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#success-alert").fadeTo(2000, 1500).slideUp(1500, function () {
+        $("#success-alert").slideUp(1500);
+    });
+</script>
